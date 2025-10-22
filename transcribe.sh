@@ -13,6 +13,14 @@ fi
 # I choose to keep both, 
 # and convert the verbose one to another VTT, "$1.tmp.vtt", for reference.
 
+# source .venv/bin/activate
+# mlx_whisper \
+#   --model "mlx-community/whisper-large-v3-turbo" \
+#   --language zh \
+#   --output-format vtt \
+#   --clip-timestamps "$2" \
+#   "$1" | tee "$1.tmp"
+
 uv run mlx_whisper \
   --model "mlx-community/whisper-large-v3-turbo" \
   --language zh \
