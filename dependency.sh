@@ -5,10 +5,10 @@
 
 # source .venv/bin/activate
 # pip install mlx mlx-whisper huggingface_hub
-# hf download --local-dir whisper-large-v3-turbo mlx-community/whisper-large-v3-turbo
+# hf download mlx-community/whisper-large-v3-turbo
 
 uv python pin 3.13
 uv sync
-uv run hf download \
-  --local-dir models/whisper-large-v3-turbo \
-  mlx-community/whisper-large-v3-turbo
+# uv run hf download mlx-community/whisper-large-v3-turbo
+
+# mlx-community/whisper-large-v2-mlx(-8bit) is also a good choice

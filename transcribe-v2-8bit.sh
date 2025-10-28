@@ -15,14 +15,14 @@ fi
 
 # source .venv/bin/activate
 # mlx_whisper \
-#   --model "mlx-community/whisper-large-v3-turbo" \
-#   --language zh \
+#   --model "mlx-community/whisper-large-v2-mlx-8bit" \
+#   --language ${3:-zh} \
 #   --output-format vtt \
 #   --clip-timestamps "$2" \
 #   "$1" | tee "$1.tmp"
 
 uv run mlx_whisper \
-  --model "mlx-community/whisper-large-v3-turbo" \
+  --model "mlx-community/whisper-large-v2-mlx-8bit" \
   --language ${3:-zh} \
   --output-format vtt \
   --clip-timestamps "$2" \
