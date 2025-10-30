@@ -4,7 +4,7 @@
 
 # check arguments
 if [ $# -lt 1 ] ;then
-    echo "Usage: $0 <input_file> [CLIP_TIMESTAMPS] [LANGUAGE]"
+    echo "Usage: $0 <input_file> [LANGUAGE] [OUTPUT_NAME] [CLIP_TIMESTAMPS]"
     exit 1
 fi
 
@@ -21,16 +21,19 @@ fi
 #   --clip-timestamps "$2" \
 #   "$1" | tee "$1.tmp"
 
+TMP="${3:-1}.tmp"
+
 uv run mlx_whisper \
   --model "mlx-community/whisper-large-v3-turbo" \
-  --language ${3:-zh} \
+  --language ${2:-zh} \
   --output-format vtt \
-  --clip-timestamps "$2" \
-  "$1" | tee "$1.tmp"
+  --output-name "$3" \
+  --clip-timestamps "$4" \
+  "$1" | tee "$TMP"
 
 # tmp2vtt
-echo "WEBVTT" > "$1.tmp.vtt"
-echo "" >> "$1.tmp.vtt"
-sed -E "s/\[(.*) --> (.*)\] (.*)/\1 --> \2\n\3\n/" "$1.tmp" >> "$1.tmp.vtt"
+echo "WEBVTT" > "$TMP.vtt"
+echo "" >> "$TMP.vtt"
+sed -E "s/\[(.*) --> (.*)\] (.*)/\1 --> \2\n\3\n/" "$TMP" >> "$TMP.vtt"
 # Delete Args in WEBVTT output
-sed '3d' "$1.tmp.vtt" > "$1.tmp.vtt.new" && mv "$1.tmp.vtt.new" "$1.tmp.vtt"
+sed '3d' "$TMP.vtt" > "$TMP.vtt.new" && mv "$TMP.vtt.new" "$TMP.vtt"
