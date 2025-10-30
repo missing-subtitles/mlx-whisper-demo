@@ -47,7 +47,7 @@ Language, output_name and timestamps are optional.
 
 - When setting output_name, If you have dots (`.`) in it, the extension of output_name must be present.
 
-To omit any optional argument, put empty `""` placeholder. For exmaple, omit output_name like this:
+**Each** omitted optional argument needs an empty `""` placeholder. For exmaple, omit output_name like this:
 
 ```bash
 bash transcribe-v2.sh audio.mp3 zh "" 55,340
